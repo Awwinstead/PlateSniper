@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "platesniper",
+  "private_key_id": "1c85303100a6ec84cf5340c134b876a330296520",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCD7fjw0fWAQarX\nJeAx5uqZZITcCePS6oKiRnc0NudLhnkBsh5+Bllx11BE2M6OyHHbJTPCoGu+Ou7/\nzAOUhRqeJ9NDVMpQ/ZsZSQdN9BJlMAt5XBiJlVxRzicziQMWWjfWD0fjgaF75p6f\n/W1sXWYzJZPSzaz20U48OtOWijivu5SLoCLtVEb2TVkxHLdc2Dy7IAelcFuuL84B\nI7lcU4seX+vY6BaT3UeJ5pwio/YkvS52r1RGjsRLNlZniztHiVjaexbHgQ0RMOgc\nrcdIbA6gkk6FOmEmaProLR+9MDrejxKzd95EqIHOFn6WRjdBPd0BAys/SGGg0aEM\n9JqlAO5tAgMBAAECggEAP4j35bYfhnxZc5KEhVPBME0l5LgIlTcl4VORLb6xJgCl\nPulSYPva0IXSXM2SsFWc615frn/GU48bMWpFYR2242qnhdoMMvPnYUZ3s5Vy1HNO\nW0w8bunU03q2C04VBAs/r6GdS9XOeJZoVwFb1J+oS8JxjchKX3UOOdhUtL9tLEe3\nbMxWxD9rVpwSI6JrdLpG6Q3ynLjr6y9x9QZ7cptQpICG/HLu5PRngKsw9gCBYvjX\n/HuPGFSoor+bB+Epbn4cUvvbelFVKfd1mLk3v+yKRn8jwW4GhKD7Rrdb3WXnAMF5\npKASVFhkhxXxvNsOZ8WevxrqE+DxHTszKOhZfGiOKwKBgQC57LPPYUkCqxP3szob\nXC1aAZM1ojkbWt/XHCB0VYmhuojda4U+WV7ZEQLPKT+kW3DpAOjJ6l9xbLGHjNB0\nkixQ1o1kHM6UovVcNWfn53F/LUeE7+ls59Ksc3fSsdVvGleqQtPMXXiSWjY0ZtAS\nvh+tC5edtk3KnHwlZSCkqwEIfwKBgQC1p3Q1NONiMPkgWGtYrMF8eh8+2cJs3e/h\n9sjn9V84PGPeutklolOJO/91aauz2awnTusxsah30PWDo82rKWe7PQ7S+/bbDTbT\nRqY9yIgLqP4gfmAoqmNq+y+WiIgngJTxRz962pjRTb3mYzAd8YwEJPyVMIr48xQ2\nqD/qwsQzEwKBgE7EhkUkjR7xRataJhLzUU9hfXFqgdEiBdUHWISQvJdlBJjx9Wg9\nyp4hw9PqQMkr6ED+nqD0h2zxRKENuj64sseorgws3CRCibp/8b5g4kej8jnSvkzi\nRfHDlY8QwkCoo11BpKNfMjamu3Il4J8gJyFT2O77Dif5desN1e+NdwmXAoGAVmNX\neYI4bNb7cy15h4dI0OjG+T3YH6wAS8bwTpe7e+QEXsUfRa2H6qjU2UKyvGpVW7BF\nW7Gwe6KtT7hTtAWR5lKoPSBEinIjU6CyqIk4YcsxZ8SR+GTnuNXSENXHYnnc203V\n25gfutIs8GbVWDgqLUJluJGIVdJMF542H3AWnG8CgYA+UkfeNxhnSIBZkQj/+gMw\nvUcK4JG3WJZCW6128J3fYOV3IRFeOpICg03Pi2Z0xyG37CdzKa8bDBwHnj1e9UiU\nA7A2aa3bzLwlZW/aJElBSPsRFprqf0x1SKQKqIohTPMpVEQU8usZY/Tnyc0mmx9T\n72gOwKSxTtUaGnjIAz6Cqg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "vision@platesniper.iam.gserviceaccount.com",
+  "client_id": "105777203873260875905",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vision%40platesniper.iam.gserviceaccount.com"
+}
