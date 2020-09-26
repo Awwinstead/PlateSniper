@@ -152,3 +152,4 @@ fabric.properties
 # ShellHacks 2020
 tmp/*
 .creds
+test*

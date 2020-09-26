@@ -2,6 +2,8 @@ import cv2
 import time
 
 
+
+
 def get_image_path():
 
     camera = cv2.VideoCapture(0)
