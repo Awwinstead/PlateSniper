@@ -4,7 +4,7 @@ import cv2
 from google.cloud import vision_v1p3beta1 as vision
 
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '.creds/PlateSniper-1c85303100a6.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '.creds/platesniper-544c99078427.json'
 SOURCE_PATH = 'tmp/'
 states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
 states = [state.upper() for state in states]
