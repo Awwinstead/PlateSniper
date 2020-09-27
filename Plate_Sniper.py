@@ -1,5 +1,22 @@
 #!/usr/bin/env python
 # coding: utf-8
+import os
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+    # required library
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import matplotlib.gridspec as gridspec
+    from local_utils import detect_lp
+    from os.path import splitext, basename
+    from keras.models import model_from_json
+    import glob
+    import os
+    import re
+    import cv1
+    from google.cloud import vision_v0p3beta1 as vision
+    from mysql_connector import upload_scans, upload_home_string, upload_business_string
+    import pandas as pd
+
 def load_model(path):
     try:
         path = splitext(path)[0]
@@ -65,44 +82,25 @@ def autonation_service(lTS):
     if lTS in Users_df.values:
         activeDF = Users_df[Users_df.LP == lTS]
         if not activeDF["Time_Slot"].isnull().sum() > 0:
-            str(activeDF.Name.to_string(index=False) + " has a meeting at"+ activeDF.Time_Slot.to_string(index=False) + " with"+  activeDF.Representitive.to_string(index=False))
+            upload_business_string(str(activeDF.Name.to_string(index=False) + " has a meeting at"+ activeDF.Time_Slot.to_string(index=False) + " with"+  activeDF.Representitive.to_string(index=False)))
         else:
-            str(activeDF.Name.to_string(index=False) + " does not have a meeting today. ")
+            upload_business_string(str(activeDF.Name.to_string(index=False) + " does not have a meeting today. "))
     else:
-        str("Unknown User, with licesnse plate number: "+ lTS + " has arrived. ")
+        upload_business_string(str("Unknown User, with licesnse plate number: "+ lTS + " has arrived. "))
 
 def Home_service(lTS):
     Home_df = pd.read_csv("Home.csv")
 
     if lTS in Home_df.values:
         activeDF2 = Home_df[Home_df.LP == lTS]
-        str(activeDF2.Name.to_string(index=False) + " is arriving Home" + "/n Lights:" + activeDF2.Lights.to_string(index=False) + "/n Garage:" + activeDF2.Garage.to_string(index=False) + "/n Temperature set to:" + activeDF2.Temp.to_string(index=False) + "/n Music:" + activeDF2.Music.to_string(index=False) + "/n Front Door:" + activeDF2.Door_Lock.to_string(index=False))
+        upload_home_string (str(activeDF2.Name.to_string(index=False) + " is arriving Home" + "/n Lights:" + activeDF2.Lights.to_string(index=False) + "/n Garage:" + activeDF2.Garage.to_string(index=False) + "/n Temperature set to:" + activeDF2.Temp.to_string(index=False) + "/n Music:" + activeDF2.Music.to_string(index=False) + "/n Front Door:" + activeDF2.Door_Lock.to_string(index=False)))
     else:
-        str(lTS + " does not belong to a member of this household. ")
+        upload_home_string(str(lTS + " does not belong to a member of this household. "))
 
 
 if __name__ == "__main__":
-    import os
-    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-    # required library
-    import numpy as np
-    import matplotlib.pyplot as plt
-    import matplotlib.gridspec as gridspec
-    from local_utils import detect_lp
-    from os.path import splitext, basename
-    from keras.models import model_from_json
-    import glob
-    import os
-    import re
-    import cv1
-    from google.cloud import vision_v0p3beta1 as vision
-    from mysql_connector import upload_scans
-    import pandas as pd
-
     PATH = "Plate_examples/american2.jpg"
-
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '.creds/platesniper-545c99078427.json'
-
 
     wpod_net_path = "wpod-net.json"
     wpod_net = load_model(wpod_net_path)
