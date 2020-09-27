@@ -154,3 +154,4 @@ fabric.properties
 tmp/*
 .creds
 test*
+mysql_creds.py

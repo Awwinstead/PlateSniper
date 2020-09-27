@@ -21,6 +21,7 @@ import os
 import re
 import cv2
 from google.cloud import vision_v1p3beta1 as vision
+from mysql_connector import upload_scans
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '.creds/platesniper-544c99078427.json'
 
@@ -64,6 +65,7 @@ def recognise_license_plate(img):
         else:
             # print(f"no match: {text}")
             pass
+    upload_scans(licenses)
     return licenses
 
 
