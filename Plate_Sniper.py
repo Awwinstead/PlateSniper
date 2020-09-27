@@ -1,32 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-# In[16]:
-
-
-# remove warning message
-import os
-
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-
-# required library
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.gridspec as gridspec
-from local_utils import detect_lp
-from os.path import splitext,basename
-from keras.models import model_from_json
-import glob
-import os
-import re
-import cv2
-from google.cloud import vision_v1p3beta1 as vision
-from mysql_connector import upload_scans
-import pandas as pd
-
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '.creds/platesniper-544c99078427.json'
-
-
 def load_model(path):
     try:
         path = splitext(path)[0]
@@ -87,45 +60,16 @@ def get_plate(image_path, Dmax=608, Dmin=256):
     _ , LpImg, _, cor = detect_lp(wpod_net, vehicle, bound_dim, lp_threshold=0.5)
     return vehicle, LpImg, cor
 
-
-wpod_net_path = "wpod-net.json"
-wpod_net = load_model(wpod_net_path)
-
-
-test_image_path = "Plate_examples/american2.jpg"
-
-
-vehicle, LpImg, cor = get_plate(test_image_path)
-
-fig = plt.figure(figsize=(12, 6))
-grid = gridspec.GridSpec(ncols=2, nrows=1, figure=fig)
-fig.add_subplot(grid[0])
-plt.axis(False)
-# plt.imshow(vehicle)
-grid = gridspec.GridSpec(ncols=2, nrows=1, figure=fig)
-fig.add_subplot(grid[1])
-plt.axis(False)
-# plt.imshow(LpImg[0])
-
-
-plate_image = cv2.convertScaleAbs(LpImg[0], alpha=255.0)
-
-PlateNum = recognise_license_plate(plate_image)
-lTS = ' '.join([str(elem) for elem in PlateNum])
-print(lTS)
-
 def autonation_service(lTS):
     Users_df = pd.read_csv("Users.csv")
     if lTS in Users_df.values:
         activeDF = Users_df[Users_df.LP == lTS]
-        if not activeDF["Time_Slot"].isnull().sum() > 1:
+        if not activeDF["Time_Slot"].isnull().sum() > 0:
             print(activeDF.Name.to_string(index=False) + " has a meeting at"+ activeDF.Time_Slot.to_string(index=False) + " with"+  activeDF.Representitive.to_string(index=False))
         else:
             print(activeDF.Name.to_string(index=False) + " does not have a meeting today. ")
     else:
         print("Unknown User, with licesnse plate number: "+ lTS + " has arrived. ")
-
-autonation_service(lTS)
 
 def Home_service(lTS):
     Home_df = pd.read_csv("Home.csv")
@@ -141,4 +85,50 @@ def Home_service(lTS):
     else:
         print(lTS + " does not belong to a member of this household. ")
 
-Home_service(lTS)
+
+if __name__ == "__main__":
+    import os
+
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+    # required library
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import matplotlib.gridspec as gridspec
+    from local_utils import detect_lp
+    from os.path import splitext, basename
+    from keras.models import model_from_json
+    import glob
+    import os
+    import re
+    import cv1
+    from google.cloud import vision_v0p3beta1 as vision
+    from mysql_connector import upload_scans
+    import pandas as pd
+
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '.creds/platesniper-545c99078427.json'
+
+
+    wpod_net_path = "wpod-net.json"
+    wpod_net = load_model(wpod_net_path)
+
+    test_image_path = "Plate_examples/american2.jpg" #change this to change the file being used.
+    vehicle, LpImg, cor = get_plate(test_image_path)
+    fig = plt.figure(figsize=(12, 6))
+    grid = gridspec.GridSpec(ncols=2, nrows=1, figure=fig)
+    fig.add_subplot(grid[0])
+    plt.axis(False)
+    # plt.imshow(vehicle)
+    grid = gridspec.GridSpec(ncols=2, nrows=1, figure=fig)
+    fig.add_subplot(grid[1])
+    plt.axis(False)
+    # plt.imshow(LpImg[0])
+
+
+    plate_image = cv2.convertScaleAbs(LpImg[0], alpha=255.0)
+    PlateNum = recognise_license_plate(plate_image)
+    lTS = ' '.join([str(elem) for elem in PlateNum])
+    #print(lTS)
+
+    autonation_service(lTS)
+
+    Home_service(lTS)
