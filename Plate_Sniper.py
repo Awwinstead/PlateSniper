@@ -107,6 +107,17 @@ plt.axis(False)
 
 plate_image = cv2.convertScaleAbs(LpImg[0], alpha=255.0)
 
-stuff = recognise_license_plate(plate_image)
-print(stuff)
+PlateNum = recognise_license_plate(plate_image)
+lTS = ' '.join([str(elem) for elem in PlateNum])
+print(lTS)
+
+import pandas as pd
+Users_df = pd.read_csv("Users.csv")
+activeDF = Users_df[Users_df.LP == lTS]
+
+if activeDF["Time_Slot"].isnull().sum() > 1:
+    print(activeDF.Name.to_string(index=False) + " does not have a meeting today. ")
+else:
+    print(activeDF.Name.to_string(index=False) + " has a meeting at"+ activeDF.Time_Slot.to_string(index=False) + " with"+  activeDF.Representitive.to_string(index=False))
+
 
