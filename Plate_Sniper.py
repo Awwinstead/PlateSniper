@@ -65,25 +65,20 @@ def autonation_service(lTS):
     if lTS in Users_df.values:
         activeDF = Users_df[Users_df.LP == lTS]
         if not activeDF["Time_Slot"].isnull().sum() > 0:
-            print(activeDF.Name.to_string(index=False) + " has a meeting at"+ activeDF.Time_Slot.to_string(index=False) + " with"+  activeDF.Representitive.to_string(index=False))
+            str(activeDF.Name.to_string(index=False) + " has a meeting at"+ activeDF.Time_Slot.to_string(index=False) + " with"+  activeDF.Representitive.to_string(index=False))
         else:
-            print(activeDF.Name.to_string(index=False) + " does not have a meeting today. ")
+            str(activeDF.Name.to_string(index=False) + " does not have a meeting today. ")
     else:
-        print("Unknown User, with licesnse plate number: "+ lTS + " has arrived. ")
+        str("Unknown User, with licesnse plate number: "+ lTS + " has arrived. ")
 
 def Home_service(lTS):
     Home_df = pd.read_csv("Home.csv")
 
     if lTS in Home_df.values:
         activeDF2 = Home_df[Home_df.LP == lTS]
-        print(activeDF2.Name.to_string(index=False) + " is arriving Home")
-        print(" Lights:" + activeDF2.Lights.to_string(index=False))
-        print(" Garage:" + activeDF2.Garage.to_string(index=False))
-        print(" Temperature set to:" + activeDF2.Temp.to_string(index=False))
-        print(" Music:" + activeDF2.Music.to_string(index=False))
-        print(" Front Door:" + activeDF2.Door_Lock.to_string(index=False))
+        str(activeDF2.Name.to_string(index=False) + " is arriving Home" + "/n Lights:" + activeDF2.Lights.to_string(index=False) + "/n Garage:" + activeDF2.Garage.to_string(index=False) + "/n Temperature set to:" + activeDF2.Temp.to_string(index=False) + "/n Music:" + activeDF2.Music.to_string(index=False) + "/n Front Door:" + activeDF2.Door_Lock.to_string(index=False))
     else:
-        print(lTS + " does not belong to a member of this household. ")
+        str(lTS + " does not belong to a member of this household. ")
 
 
 if __name__ == "__main__":
