@@ -22,6 +22,7 @@ import re
 import cv2
 from google.cloud import vision_v1p3beta1 as vision
 from mysql_connector import upload_scans
+import pandas as pd
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '.creds/platesniper-544c99078427.json'
 
@@ -113,13 +114,31 @@ PlateNum = recognise_license_plate(plate_image)
 lTS = ' '.join([str(elem) for elem in PlateNum])
 print(lTS)
 
-import pandas as pd
-Users_df = pd.read_csv("Users.csv")
-activeDF = Users_df[Users_df.LP == lTS]
+def autonation_service(lTS):
+    Users_df = pd.read_csv("Users.csv")
+    if lTS in Users_df.values:
+        activeDF = Users_df[Users_df.LP == lTS]
+        if not activeDF["Time_Slot"].isnull().sum() > 1:
+            print(activeDF.Name.to_string(index=False) + " has a meeting at"+ activeDF.Time_Slot.to_string(index=False) + " with"+  activeDF.Representitive.to_string(index=False))
+        else:
+            print(activeDF.Name.to_string(index=False) + " does not have a meeting today. ")
+    else:
+        print("Unknown User, with licesnse plate number: "+ lTS + " has arrived. ")
 
-if activeDF["Time_Slot"].isnull().sum() > 1:
-    print(activeDF.Name.to_string(index=False) + " does not have a meeting today. ")
-else:
-    print(activeDF.Name.to_string(index=False) + " has a meeting at"+ activeDF.Time_Slot.to_string(index=False) + " with"+  activeDF.Representitive.to_string(index=False))
+autonation_service(lTS)
 
+def Home_service(lTS):
+    Home_df = pd.read_csv("Home.csv")
 
+    if lTS in Home_df.values:
+        activeDF2 = Home_df[Home_df.LP == lTS]
+        print(activeDF2.Name.to_string(index=False) + " is arriving Home")
+        print(" Lights:" + activeDF2.Lights.to_string(index=False))
+        print(" Garage:" + activeDF2.Garage.to_string(index=False))
+        print(" Temperature set to:" + activeDF2.Temp.to_string(index=False))
+        print(" Music:" + activeDF2.Music.to_string(index=False))
+        print(" Front Door:" + activeDF2.Door_Lock.to_string(index=False))
+    else:
+        print(lTS + " does not belong to a member of this household. ")
+
+Home_service(lTS)
