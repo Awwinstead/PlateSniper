@@ -88,7 +88,6 @@ def Home_service(lTS):
 
 if __name__ == "__main__":
     import os
-
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
     # required library
     import numpy as np
@@ -105,13 +104,15 @@ if __name__ == "__main__":
     from mysql_connector import upload_scans
     import pandas as pd
 
+    PATH = "Plate_examples/american2.jpg"
+
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '.creds/platesniper-545c99078427.json'
 
 
     wpod_net_path = "wpod-net.json"
     wpod_net = load_model(wpod_net_path)
 
-    test_image_path = "Plate_examples/american2.jpg" #change this to change the file being used.
+    test_image_path = PATH  #change this to change the file being used.
     vehicle, LpImg, cor = get_plate(test_image_path)
     fig = plt.figure(figsize=(12, 6))
     grid = gridspec.GridSpec(ncols=2, nrows=1, figure=fig)
