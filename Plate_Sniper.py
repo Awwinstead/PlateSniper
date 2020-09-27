@@ -99,7 +99,9 @@ def Home_service(lTS):
 
 
 if __name__ == "__main__":
-    PATH = "Plate_examples/american2.jpg"
+    import sys
+   # "Plate_examples/american2.jpg"
+    PATH = sys.argv[1]
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '.creds/platesniper-545c99078427.json'
 
     wpod_net_path = "wpod-net.json"
